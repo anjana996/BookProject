@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from book.models import Book
-from book.forms import BookCreateForm
+from book.forms import BookCreateForm,BookUpdate
 
 # Create your views here.
 def bookCreate(request):
@@ -42,11 +42,11 @@ def deleteBook(request,pk):
 
 def updateBook(request,pk):
     book=Book.objects.get(id=pk)
-    form = BookCreateForm(instance=book)
+    form = BookUpdate(instance=book)
     context = {}
     context["form"] = form
     if request.method == "POST":
-        form = BookCreateForm(instance=book,data=request.POST)
+        form = BookUpdate(instance=book,data=request.POST)
         if form.is_valid():
             form.save()
             return redirect("list")
