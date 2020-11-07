@@ -27,4 +27,7 @@ class BookCreateForm(ModelForm):
           if pages<50:
                msg="pageNo should be greater than 50"
                self.add_error('page',msg)
-
+class BookUpdate(ModelForm):
+     class Meta:
+          model = Book
+          fields = "__all__"
