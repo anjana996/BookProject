@@ -14,10 +14,8 @@ def bookCreate(request):
         form=BookCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            qs=Book.objects.all()
-            context={}
-            context["books"]=qs
-            return render(request, template_name, context)
+           
+            return redirect("create")
         else:
 
             context["form"]=form
@@ -38,7 +36,7 @@ def viewBook(request,pk):
     return render(request,template_name,context)
 def deleteBook(request,pk):
     qs = Book.objects.get(id=pk).delete()
-    return redirect("list")
+    return redirect("create")
 
 def updateBook(request,pk):
     book=Book.objects.get(id=pk)
@@ -49,7 +47,7 @@ def updateBook(request,pk):
         form = BookUpdate(instance=book,data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect("list")
+            return redirect("create")
 
     return render(request,"bookupdate.html",context)
 
